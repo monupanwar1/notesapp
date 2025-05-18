@@ -3,8 +3,9 @@ import { NextFunction, Request, Response, Router } from 'express'; // Import Nex
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import { JWT_SECRET } from '../config';
-import { UserModel } from '../db';
+import { contentModel, UserModel } from '../models/db';
 import app from '..';
+import { userMiddlewares } from '../middlewares/userAuth';
 
 const userRouter = Router();
 
@@ -94,7 +95,30 @@ userRouter.post(
 
 
 // add content
+userRouter.post('/addContent',userMiddlewares,async(req:Request,res:Response)=>{
+  const{link,type,title}=req.body;
 
+  await contentModel.create({
+    link,
+    type,
+    title,
+    userId:req.userId,
+    tags:[]
+  });
+  res.status(200).json({
+    message:"content added"
+  })
+})
 
+userRouter.get('/getContent',userMiddlewares, async (req: Request, res: Response) => {
+  // @ts-ignore
+  const userId =req.userId;
+  const content = await contentModel.find({userId})
+  res.status(200).json({
+    message: 'content',
+    content
+
+  });
+});
 
 export default userRouter;
