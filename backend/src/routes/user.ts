@@ -4,8 +4,9 @@ import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import { JWT_SECRET } from '../config';
 import { UserModel } from '../db';
+import app from '..';
 
-const authRouter = Router();
+const userRouter = Router();
 
 // Zod Schemas
 const authSchema = z.object({
@@ -14,7 +15,7 @@ const authSchema = z.object({
 });
 
 // Signup Route
-authRouter.post(
+userRouter.post(
   '/signup',
   (req: Request, res: Response, next: NextFunction) => {
     (async () => {
@@ -46,7 +47,7 @@ authRouter.post(
 );
 
 // Signin Route
-authRouter.post(
+userRouter.post(
   '/signin',
   (req: Request, res: Response, next: NextFunction) => {
     (async () => {
@@ -91,4 +92,9 @@ authRouter.post(
   }
 );
 
-export default authRouter;
+
+// add content
+
+
+
+export default userRouter;
