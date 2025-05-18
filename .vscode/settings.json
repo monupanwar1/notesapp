@@ -1,0 +1,215 @@
+{
+  // === Formatter & Editor Settings ===
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "prettier.requireConfig": false,
+  "prettier.printWidth": 80,
+  "prettier.useTabs": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "always",
+  "prettier.endOfLine": "lf",
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+
+  // === Font Settings (JetBrains Mono) ===
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 22,
+  "editor.lineNumbers": "off",
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.renderWhitespace": "all",
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "line",
+  "editor.wrappingIndent": "same",
+  "editor.wordWrap": "on",
+  "editor.matchBrackets": "always",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.colorDecorators": true,
+  "editor.tabCompletion": "on",
+  "editor.peekWidgetDefaultFocus": "tree",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.parameterHints.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // === Terminal Settings ===
+  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+
+  // === Explorer & UI ===
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,b
+  "explorer.compactFolders": false,
+  "explorer.autoReveal": true,
+  "explorer.openEditors.visible": 10,
+  "breadcrumbs.enabled": true,
+  "workbench.statusBar.visible": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.activityBar.location": "hidden",
+  "workbench.layoutControl.enabled": false,
+  "window.menuBarVisibility": "compact",
+  "window.commandCenter": false,
+  "window.zoomLevel": 2,
+
+  // === CSS / HTML / React ===
+  "css.styleSheets": ["src/**/*.css"],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+
+  // === Git ===
+  "git.openRepositoryInParentFolders": "never",
+  "git.confirmSync": false,
+  "git.autorefresh": true,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+
+  // === ESLint ===
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // === File & Search Exclude ===
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+
+  // === Auto Rename & Close Tag ===
+  "auto-rename-tag.activationOnLanguage": [
+    "html",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "auto-close-tag.activationOnLanguage": [
+    "html",
+    "xml",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+
+  // === Debug ===
+  "debug.inlineValues": true,
+  "debug.console.fontSize": 14,
+
+  // === Token Color Customizations ===
+  "editor.tokenColorCustomizations": {
+    "[Tokyo Night]": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment",
+            "meta.var.expr storage.type",
+            "keyword.control.flow",
+            "keyword.control.return",
+            "meta.directive.vue punctuation.separator.key-value.html",
+            "meta.directive.vue entity.other.attribute-name.html",
+            "tag.decorator.js entity.name.tag.js",
+            "tag.decorator.js punctuation.definition.tag.js",
+            "storage.modifier"
+          ],
+          "settings": {
+            "fontStyle": ""
+          }
+        },
+        {
+          "scope": [
+            "comment keyword.codetag.notation",
+            "comment.block.documentation keyword",
+            "comment.block.documentation storage.type.class"
+          ],
+          "settings": {
+            "foreground": "#bb9af7"
+          }
+        },
+        {
+          "scope": ["comment.block.documentation entity.name.type.instance"],
+          "settings": {
+            "foreground": "#73daca",
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": ["comment.block.documentation entity.name.type punctuation.definition.bracket"],
+          "settings": {
+            "foreground": "#bb9af7"
+          }
+        },
+        {
+          "scope": ["comment.block.documentation variable"],
+          "settings": {
+            "foreground": "#e0af68",
+            "fontStyle": "italic"
+          }
+        }
+      ]
+    }
+  },
+
+  // === Workbench Color Customizations ===
+  "workbench.colorCustomizations": {
+    "[Tokyo Night]": {
+      "foreground": "#959cbd",
+      "panelTitle.activeBorder": "#3d59a1",
+      "panelTitle.activeForeground": "#bdc7f0",
+      "panelTitle.inactiveForeground": "#959cbd",
+      "tab.activeForeground": "#bdc7f0",
+      "tab.inactiveForeground": "#959cbd",
+      "breadcrumb.foreground": "#959cbd",
+      "breadcrumb.focusForeground": "#bdc7f0",
+      "breadcrumb.activeSelectionForeground": "#bdc7f0",
+      "statusBar.foreground": "#bdc7f0",
+      "list.focusForeground": "#bdc7f0",
+      "list.hoverForeground": "#bdc7f0",
+      "list.activeSelectionForeground": "#bdc7f0",
+      "list.inactiveSelectionForeground": "#bdc7f0",
+      "list.inactiveSelectionBackground": "#202330",
+      "sideBar.foreground": "#959cbd",
+      "dropdown.foreground": "#959cbd",
+      "menu.foreground": "#bdc7f0",
+      "menubar.selectionForeground": "#bdc7f0",
+      "input.foreground": "#959cbd",
+      "input.placeholderForeground": "#959cbd",
+      "activityBar.foreground": "#bdc7f0",
+      "activityBar.inactiveForeground": "#787c99",
+      "gitDecoration.ignoredResourceForeground": "#696d87",
+      "editorCodeLens.foreground": "#7982a9",
+      "window.activeBorder": "#ff0000",
+      "window.inactiveBorder": "#0000ff"
+    }
+  }
+}
