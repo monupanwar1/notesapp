@@ -16,21 +16,26 @@ exports.userMiddlewares = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
 const userMiddlewares = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'No token provided' });
-    }
-    const token = authHeader.split(' ')[1];
+    // Explicitly define the return type as Promise<void>
     try {
+        const header = req.headers.authorization;
+        if (!header || !header.startsWith('Bearer ')) {
+            res // Remove 'return' here
+                .status(401)
+                .json({ message: 'Authorization header missing or invalid' });
+            return; // Still need to return to prevent further execution in this middleware
+        }
+        const token = header.split(' ')[1];
         const decoded = jsonwebtoken_1.default.verify(token, config_1.JWT_SECRET);
-        // Attach userId to request
-        // @ts-ignore
         req.userId = decoded.id;
         next();
     }
-    catch (err) {
-        console.error('JWT Verification Error:', err);
-        return res.status(401).json({ message: 'Invalid or expired token' });
+    catch (error) {
+        console.error('Authentication error:', error);
+        res // Remove 'return' here
+            .status(401)
+            .json({ message: 'Unauthorized' });
+        return; // Still need to return to prevent further execution
     }
 });
 exports.userMiddlewares = userMiddlewares;

@@ -37,31 +37,31 @@ exports.LinkModel = exports.contentModel = exports.UserModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const UserSchema = new mongoose_1.Schema({
     username: { type: String, unique: true },
-    password: { type: String }
+    password: { type: String },
 });
 const ContentSchema = new mongoose_1.Schema({
     title: String,
     LinK: String,
-    tags: [{
+    tags: [
+        {
             type: mongoose_1.default.Types.ObjectId,
-            ref: "tags"
-        }],
-    userId: [{
-            type: mongoose_1.default.Types.ObjectId,
-            ref: "User",
-            required: true
-        }],
+            ref: 'tags',
+        },
+    ],
+    userId: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
 });
 const LinkSchema = new mongoose_1.Schema({
     hash: String,
-    userId: [
-        {
-            type: mongoose_1.default.Types.ObjectId,
-            ref: 'User',
-            required: true,
-            unique: true,
-        },
-    ],
+    userId: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        unique: true,
+    },
 });
 exports.UserModel = (0, mongoose_1.model)('User', UserSchema);
 exports.contentModel = (0, mongoose_1.model)('Content', ContentSchema);
