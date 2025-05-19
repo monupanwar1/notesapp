@@ -196,12 +196,3 @@ userRouter.get(
       });
   }
 );
-// Add these test routes at the TOP of your router file
-userRouter.get('/test', (req, res) => {
-  res.json({ message: 'Simple GET works!' });
-});
-
-userRouter.delete('/test', (req, res) => {
-  res.json({ message: 'DELETE method works!' });
-});
-export default userRouter;
