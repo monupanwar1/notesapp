@@ -112,9 +112,12 @@ userRouter.get('/getContent', userAuth_1.userMiddlewares, (req, res) => __awaite
 }));
 // In your userRouter file
 userRouter.delete('/getContent', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        message: 'hello',
+    const contentId = req.body.contentId;
+    yield db_1.contentModel.deleteMany({
+        contentId,
+        userId: req.userId,
     });
+    res.json({ message: "Deleted" });
 }));
 // Share brain (create/get link)
 userRouter.post('/brain/share', userAuth_1.userMiddlewares, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -171,11 +174,3 @@ userRouter.get('/brain/:shareLink', (req, res, next) => {
             next(error);
     });
 });
-// Add these test routes at the TOP of your router file
-userRouter.get('/test', (req, res) => {
-    res.json({ message: 'Simple GET works!' });
-});
-userRouter.delete('/test', (req, res) => {
-    res.json({ message: 'DELETE method works!' });
-});
-exports.default = userRouter;
