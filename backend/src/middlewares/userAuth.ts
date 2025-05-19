@@ -1,30 +1,41 @@
 import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
+
+// Extend the Request interface to include userId
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string;
+    }
+  }
+}
 
 export const userMiddlewares = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  const authHeader = req.headers['authorization'];
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'No token provided' });
-  }
-
-  const token = authHeader.split(' ')[1];
-
+): Promise<void> => {
+  // Explicitly define the return type as Promise<void>
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
+    const header = req.headers.authorization;
+    if (!header || !header.startsWith('Bearer ')) {
+      res // Remove 'return' here
+        .status(401)
+        .json({ message: 'Authorization header missing or invalid' });
+      return; // Still need to return to prevent further execution in this middleware
+    }
 
-    // Attach userId to request
-    // @ts-ignore
+    const token = header.split(' ')[1];
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+
     req.userId = decoded.id;
-
     next();
-  } catch (err) {
-    console.error('JWT Verification Error:', err);
-    return res.status(401).json({ message: 'Invalid or expired token' });
+  } catch (error) {
+    console.error('Authentication error:', error);
+    res // Remove 'return' here
+      .status(401)
+      .json({ message: 'Unauthorized' });
+    return; // Still need to return to prevent further execution
   }
 };
