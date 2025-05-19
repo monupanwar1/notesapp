@@ -130,7 +130,7 @@ userRouter.delete(
   '/getContent',
   userMiddlewares,
   async (req: Request, res: Response) => {
-    const contentId = req.body.contentId;
+    const contentId = req.body?.contentId;
     await contentModel.deleteMany({
       contentId,
       userId: req.userId,
