@@ -126,14 +126,18 @@ userRouter.get(
 );
 
 // In your userRouter file
-userRouter.delete('/getContent', async (req: Request, res: Response) => {
-  const contentId=req.body.contentId;
-  await contentModel.deleteMany({
-    contentId,
-    userId: req.userId,
-  });
-  res.json({ message: "Deleted" })
-});
+userRouter.delete(
+  '/getContent',
+  userMiddlewares,
+  async (req: Request, res: Response) => {
+    const contentId = req.body.contentId;
+    await contentModel.deleteMany({
+      contentId,
+      userId: req.userId,
+    });
+    res.json({ message: 'Deleted' });
+  }
+);
 // Share brain (create/get link)
 userRouter.post(
   '/brain/share',

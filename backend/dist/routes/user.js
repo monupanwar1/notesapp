@@ -174,3 +174,4 @@ userRouter.get('/brain/:shareLink', (req, res, next) => {
             next(error);
     });
 });
+exports.default = userRouter;
