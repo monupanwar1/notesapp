@@ -1,15 +1,25 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/Button";
+import Input from "@/components/input";
 
 export default function Signin() {
   return (
-    <div className="h-screen w-full bg-gray-200 flex items-center justify-center">
-      <div className="bg-white  rounded-xl border  min-w-48 space-y-4 text-center p-20">
-        <Input placeholder="Username" type="username" />
-        <Input placeholder="Password" type="password" />
+    <div className="h-screen w-screen bg-gray-200 flex justify-center items-center">
+      <div className="bg-white rounded-xl border min-w-48 p-8">
+       
+        <Input  placeholder="Username" />
 
+       
+        <Input placeholder="Password" />
+
+        {/* Submit button */}
         <div className="flex justify-center pt-4">
-          <Button>Signin</Button>
+          <Button
+           
+            loading={false}
+            variant="primary"
+            text="Signin"
+            fullWidth={true}
+          />
         </div>
       </div>
     </div>
