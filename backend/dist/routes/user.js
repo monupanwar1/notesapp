@@ -111,13 +111,14 @@ userRouter.get('/getContent', userAuth_1.userMiddlewares, (req, res) => __awaite
     });
 }));
 // In your userRouter file
-userRouter.delete('/getContent', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const contentId = req.body.contentId;
+userRouter.delete('/getContent', userAuth_1.userMiddlewares, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const contentId = (_a = req.body) === null || _a === void 0 ? void 0 : _a.contentId;
     yield db_1.contentModel.deleteMany({
         contentId,
         userId: req.userId,
     });
-    res.json({ message: "Deleted" });
+    res.json({ message: 'Deleted' });
 }));
 // Share brain (create/get link)
 userRouter.post('/brain/share', userAuth_1.userMiddlewares, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
