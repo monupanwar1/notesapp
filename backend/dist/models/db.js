@@ -41,7 +41,7 @@ const UserSchema = new mongoose_1.Schema({
 });
 const ContentSchema = new mongoose_1.Schema({
     title: String,
-    LinK: String,
+    link: String,
     tags: [
         {
             type: mongoose_1.default.Types.ObjectId,
