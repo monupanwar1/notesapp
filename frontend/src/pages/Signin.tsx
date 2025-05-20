@@ -33,7 +33,7 @@ export default function Signin() {
       alert('You have signin up successfully!');
     } catch (error) {
       console.error('Signin failed:', error);
-      alert('Signup failed. Please try again.');
+      alert('Signin failed. Please try again.');
     }
   }
 
