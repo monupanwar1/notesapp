@@ -7,7 +7,7 @@ const UserSchema = new Schema({
 
 const ContentSchema = new Schema({
   title: String,
-  LinK: String,
+  link: String,
   tags: [
     {
       type: mongoose.Types.ObjectId,

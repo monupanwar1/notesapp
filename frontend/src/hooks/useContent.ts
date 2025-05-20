@@ -16,7 +16,7 @@ export function useContent() {
         },
       })
       .then((response) => {
-        const data = response.data?.getContent ?? [];
+        const data = response.data?.content ?? [];
         setContent(data);
         
       })
