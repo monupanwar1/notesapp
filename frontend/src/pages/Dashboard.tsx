@@ -63,14 +63,14 @@ export  default function Dashboard() {
         </div>
 
         <div className="flex gap-4 flex-wrap">
-          <Card
+          {/* <Card
             title="Rick Astley - Never Gonna Give You Up"
             link="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             type="youtube"
-          />
-          {/* {content.map(({_id, type, link, title }) => (
+          /> */}
+          {content.map(({_id, type, link, title }) => (
             <Card key={_id} type={type} link={link} title={title} />
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

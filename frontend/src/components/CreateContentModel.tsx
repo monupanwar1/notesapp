@@ -24,37 +24,26 @@ export function CreateContentModel({ open, onClose }: CreateContentModalProps) {
   const [type, setType] = useState<ContentType>(ContentType.Youtube);
 
   async function addContent() {
-    
-
     const title = titleRef.current?.value;
     const link = linkRef.current?.value;
     const token = localStorage.getItem('token');
 
-    
-
-    if (!token) {
-      alert('You are not logged in!');
-      return;
-    }
-
-    if (!title || !link) {
-      alert('Please enter both title and link.');
+    if (!token || !title || !link) {
+      alert(token ? 'Please fill all fields' : 'You are not logged in!');
       return;
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         BACKEND_URL,
         { title, link, type },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      console.log('Added content:', response.data.content); // Debug
       onClose();
-    } catch (error: any) {
+      // Trigger a refetch here if using a state manager
+    } catch (error) {
       console.error('Failed to add content:', error);
       alert('Failed to add content. Please try again.');
     }

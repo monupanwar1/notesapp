@@ -1,8 +1,18 @@
-import { ShareIcon } from "@/icons/ShareIcon";
-import { useState } from "react";
+import { useState } from 'react';
+import { ShareIcon } from '@/icons/ShareIcon';
+import { TwitterIcon } from '@/icons/TwitterIcon';
+import { ClipboardIcon } from '@/icons/ClipboardIcon';
 
-export function Card({ title, link, type }) {
+
+interface CardProps {
+  title: string;
+  link: string;
+  type: 'youtube' | 'twitter';
+}
+
+export function Card({ title, link, type }: CardProps) {
   const [showVideo, setShowVideo] = useState(false);
+  const [showShareOptions, setShowShareOptions] = useState(false);
 
   const getYoutubeId = (url: string): string | null => {
     const regex =
@@ -16,17 +26,94 @@ export function Card({ title, link, type }) {
     ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
     : '';
 
-  console.log('Debug:', { link, videoId, thumbnail });
+  const handleNativeShare = async () => {
+    try {
+      await navigator.share({
+        title: title,
+        text: `Check this out: ${title}`,
+        url: link,
+      });
+    } catch (err) {
+      console.log('Native sharing cancelled', err);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      alert('Link copied to clipboard!');
+      setShowShareOptions(false);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy link');
+    }
+  };
+
+  const shareToTwitter = () => {
+    const tweetText = `${title} ${link}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      tweetText
+    )}`;
+    window.open(twitterUrl, '_blank', 'width=550,height=420');
+    setShowShareOptions(false);
+  };
+
+ 
+
+  const handleShareClick = () => {
+    if (navigator.share) {
+      handleNativeShare();
+    } else {
+      setShowShareOptions(!showShareOptions);
+    }
+  };
 
   return (
-    <div className="p-4 bg-white rounded-md border-gray-200 max-w-72 border min-h-48 min-w-72">
+    <div className="p-4 bg-white rounded-md border-gray-200 max-w-72 border min-h-48 min-w-72 relative">
+      {/* Header with title and share button */}
       <div className="flex justify-between">
-        <div className="flex items-center text-md">{title}</div>
-        <div className="text-gray-500">
-          <ShareIcon />
+        <div className="flex items-center text-md font-medium truncate max-w-[180px]">
+          {title}
+        </div>
+        <div className="relative">
+          <button
+            onClick={handleShareClick}
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+            aria-label="Share content"
+          >
+            <ShareIcon />
+          </button>
+
+          {/* Share options dropdown */}
+          {showShareOptions && (
+            <div className="absolute right-0 top-8 bg-white rounded-md shadow-lg p-2 z-10 w-48 border border-gray-200">
+              <button
+                onClick={copyToClipboard}
+                className="flex items-center w-full p-2 hover:bg-gray-100 rounded"
+              >
+                <ClipboardIcon />
+                Copy Link
+              </button>
+              <button
+                onClick={shareToTwitter}
+                className="flex items-center w-full p-2 hover:bg-gray-100 rounded"
+              >
+                <TwitterIcon />
+                Share to Twitter
+              </button>
+              <button
+                onClick={shareToFacebook}
+                className="flex items-center w-full p-2 hover:bg-gray-100 rounded"
+              >
+                <FacebookIcon className="w-4 h-4 mr-2 text-blue-600" />
+                Share to Facebook
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
+      {/* Content */}
       <div className="pt-4">
         {type === 'youtube' && videoId && (
           <>
