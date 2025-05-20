@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signup from './pages/Signup.tsx';
 import Signin from './pages/Signin.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 const router= createBrowserRouter([
   {
@@ -21,8 +22,12 @@ const router= createBrowserRouter([
     element:<Signin/> 
   },
   {
-    path:"/dashboard",
-    element:<Dashboard/> 
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Dashboard/>
+      </ProtectedRoute>
+    )
   }
 ])
   

@@ -29,7 +29,7 @@ export default function Signin() {
 
       const jwt =response.data.token;
       localStorage.setItem("token" ,jwt)
-      navigate('/dashboard');
+      navigate('/dashboard',{ replace: true });
       alert('You have signin up successfully!');
     } catch (error) {
       console.error('Signin failed:', error);
