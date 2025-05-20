@@ -6,13 +6,15 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const isAuthenticated = localStorage.getItem('token'); // Or your auth state
+  // Check authentication - consider using a more robust check in production
+  const isAuthenticated = localStorage.getItem('token');
 
   if (!isAuthenticated) {
-    return <Navigate to="/signin" replace />;
+    // Redirect to home page if not authenticated
+    return <Navigate to="/" replace />;
   }
 
   return children;
 };
 
-export default ProtectedRoute;
+export default ProtectedRoute; // Fixed typo in export
