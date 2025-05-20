@@ -1,19 +1,12 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 
 import connectDB from './connectDB';
 import userRouter from './routes/user';
 
 const app = express();
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000', // ✅ or '*' if you're using Postman
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
